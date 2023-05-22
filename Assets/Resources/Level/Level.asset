@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c874cdc09e218624abdb93a6571b8a2f, type: 3}
+  m_Name: Level
+  m_EditorClassIdentifier: 
+  LevelValues:
+  - levelID: 1
+    levelName: 'Journey of Sunlit Shores '
+    typeTileCount: 3
+    TileValuesList:
+    - type: 3
+      tilePosition: {x: -200, y: 275}
+    - type: 5
+      tilePosition: {x: 0, y: 275}
+    - type: 0
+      tilePosition: {x: 200, y: 275}
+    - type: 0
+      tilePosition: {x: -200, y: 75}
+    - type: 3
+      tilePosition: {x: 0, y: 75}
+    - type: 0
+      tilePosition: {x: 200, y: 75}
+    - type: 5
+      tilePosition: {x: -200, y: -125}
+    - type: 3
+      tilePosition: {x: 0, y: -125}
+    - type: 5
+      tilePosition: {x: 200, y: -125}
+  - levelID: 2
+    levelName: 'Secrets Behind Blooming Gardens '
+    typeTileCount: 3
+    TileValuesList:
+    - type: 3
+      tilePosition: {x: -200, y: 275}
+    - type: 5
+      tilePosition: {x: 0, y: 275}
+    - type: 0
+      tilePosition: {x: 200, y: 275}
+    - type: 0
+      tilePosition: {x: -200, y: 75}
+    - type: 3
+      tilePosition: {x: 0, y: 75}
+    - type: 0
+      tilePosition: {x: 200, y: 75}
+    - type: 5
+      tilePosition: {x: -200, y: -125}
+    - type: 3
+      tilePosition: {x: 0, y: -125}
+    - type: 5
+      tilePosition: {x: 200, y: -125}
+  - levelID: 3
+    levelName: 'Destruction of Frosty Chains '
+    typeTileCount: 3
+    TileValuesList:
+    - type: 3
+      tilePosition: {x: -200, y: 275}
+    - type: 5
+      tilePosition: {x: 0, y: 275}
+    - type: 0
+      tilePosition: {x: 200, y: 275}
+    - type: 0
+      tilePosition: {x: -200, y: 75}
+    - type: 3
+      tilePosition: {x: 0, y: 75}
+    - type: 0
+      tilePosition: {x: 200, y: 75}
+    - type: 5
+      tilePosition: {x: -200, y: -125}
+    - type: 3
+      tilePosition: {x: 0, y: -125}
+    - type: 5
+      tilePosition: {x: 200, y: -125}
+  - levelID: 4
+    levelName: 'Invincible Obstacles of Sunshine '
+    typeTileCount: 3
+    TileValuesList:
+    - type: 3
+      tilePosition: {x: -200, y: 275}
+    - type: 5
+      tilePosition: {x: 0, y: 275}
+    - type: 0
+      tilePosition: {x: 200, y: 275}
+    - type: 0
+      tilePosition: {x: -200, y: 75}
+    - type: 3
+      tilePosition: {x: 0, y: 75}
+    - type: 0
+      tilePosition: {x: 200, y: 75}
+    - type: 5
+      tilePosition: {x: -200, y: -125}
+    - type: 3
+      tilePosition: {x: 0, y: -125}
+    - type: 5
+      tilePosition: {x: 200, y: -125}
+  - levelID: 5
+    levelName: 'Deadly Test of Solar Fireworks '
+    typeTileCount: 3
+    TileValuesList:
+    - type: 3
+      tilePosition: {x: -200, y: 275}
+    - type: 5
+      tilePosition: {x: 0, y: 275}
+    - type: 0
+      tilePosition: {x: 200, y: 275}
+    - type: 0
+      tilePosition: {x: -200, y: 75}
+    - type: 3
+      tilePosition: {x: 0, y: 75}
+    - type: 0
+      tilePosition: {x: 200, y: 75}
+    - type: 5
+      tilePosition: {x: -200, y: -125}
+    - type: 3
+      tilePosition: {x: 0, y: -125}
+    - type: 5
+      tilePosition: {x: 200, y: -125}

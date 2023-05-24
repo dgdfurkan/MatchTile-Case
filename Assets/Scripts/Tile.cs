@@ -85,7 +85,12 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         // Stop animation of scaling
         // Check for game manager
 
-        if (isUnder || isFinal) return;
+        if (isUnder || isFinal)
+        {
+            VibrationManager.Instance.Vibration(HapticTypes.Warning);
+            return;
+        }
+        VibrationManager.Instance.Vibration(HapticTypes.VibrationImpact);
         GameManager.Instance.CheckTile(this);
     }
 }

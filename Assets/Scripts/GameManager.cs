@@ -1,3 +1,4 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
 
     private int firstValue;
 
-    private int score = 0;
+    [HideInInspector]
+    public int score = 0;
     private const int amount = 300;
 
     private void Awake()
@@ -30,9 +32,10 @@ public class GameManager : MonoBehaviour
         score = PlayerPrefs.GetInt("Score", 0);
     }
 
-    public void SetupGame()
+    public void StartGame()
     {
-        
+        LevelManager.Instance.LoadCurrentLevelValues();
+        UIManager.Instance.GameState(true);
     }
 
     public void CheckTile(Tile tile)
@@ -150,6 +153,42 @@ public class GameManager : MonoBehaviour
         else if (tileList.Count == tileLenght)
         {
             print("<color=red> Lose </color>");
+
+            //foreach (Tile item in allTiles)
+            //{
+            //    allTiles.Remove(item);
+            //    item.isFinal = false;
+            //    ObjectPool.Instance.ReturnObjectToPool(item.gameObject);
+            //}
+
+            //foreach (Tile item in tileList)
+            //{
+            //    tileList.Remove(item);
+            //    item.isFinal = false;
+            //    ObjectPool.Instance.ReturnObjectToPool(item.gameObject);
+            //}
+
+            Debug.Log(allTiles.Count);
+
+            for (int i = 0; i < allTiles.Count; i++)
+            {
+                allTiles[i].isFinal = false;
+                ObjectPool.Instance.ReturnObjectToPool(allTiles[i].gameObject);
+            }
+
+            for (int i = 0; i < tileList.Count; i++)
+            {
+                tileList[i].isFinal = false;
+                ObjectPool.Instance.ReturnObjectToPool(tileList[i].gameObject);
+            }
+
+            allTiles.Clear();
+            tileList.Clear();
+
+            Debug.Log(allTiles.Count);
+
+            levelTiles = 0;
+
             UIManager.Instance.LevelEndPanel(true, false, LevelManager.Instance.CurrentLevelData.levelID);
         }
     }
@@ -208,12 +247,28 @@ public class GameManager : MonoBehaviour
 
                     StartCoroutine(EditAfterMatching(.5f));
 
-                    score += amount;
-                    PlayerPrefs.SetInt("Score", score);
-                    UIManager.Instance.UpdatingScore(amount, score);
+                    ScoreAmount(amount);
+                    //score += amount;
+                    //PlayerPrefs.SetInt("Score", score);
+                    //UIManager.Instance.UpdatingScore(amount, score);
                 }
             }
         }
+    }
+
+    public void ScoreAmount(int value)
+    {
+        score += value;
+        PlayerPrefs.SetInt("Score", score);
+        UIManager.Instance.UpdatingScore(value, score);
+        //UIManager.Instance.UpdateScore();
+    }
+
+    public void ScoreAmountDecrease(int value)
+    {
+        score += value;
+        PlayerPrefs.SetInt("Score", score);
+        UIManager.Instance.DecreaseScore(value, score);
     }
 
     IEnumerator DeactivateObject (GameObject go)

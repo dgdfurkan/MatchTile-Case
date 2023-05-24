@@ -9,9 +9,17 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    public GameManager gameManager;
+
     [SerializeField] private TextMeshProUGUI levelID;
     [SerializeField] private TextMeshProUGUI levelName;
     [SerializeField] private TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI menuScore;
+
+    [Header("Menu and Game Panels")]
+    [SerializeField ] private GameObject gameUIParent;
+    [SerializeField ] private GameObject targetArea;
+    [SerializeField ] private GameObject menuPanel;
 
     [Header("LevelEndPanel")]
     [SerializeField] private GameObject levelEndPanel;
@@ -23,6 +31,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI boosterMagnet;
     [SerializeField] private TextMeshProUGUI boosterR;
     [SerializeField] private TextMeshProUGUI boosterHighlight;
+    [SerializeField] private GameObject[] informationPanels;
+    [SerializeField] private GameObject[] infoButtons;
 
     void Awake()
     {
@@ -31,6 +41,15 @@ public class UIManager : MonoBehaviour
         LevelEndPanel(false, false, 0);
 
         UpdateScore();
+
+        GameState(false);
+    }
+
+    public void GameState(bool value)
+    {
+        menuPanel.SetActive(!value);
+        gameUIParent.SetActive(value);
+        targetArea.SetActive(value);
     }
 
     public void GetLevelValues(int value, string name)
@@ -43,6 +62,15 @@ public class UIManager : MonoBehaviour
     {
         int scoreValue = PlayerPrefs.GetInt("Score", 0);
         score.text = "Score: " + scoreValue;
+        menuScore.text = "Score: " + scoreValue;
+
+        int boosterMagnetValue = PlayerPrefs.GetInt("BoosterMagnet", 0);
+        int boosterRValue = PlayerPrefs.GetInt("BoosterR", 0);
+        int boosterHighlightValue = PlayerPrefs.GetInt("BoosterHighlight", 0);
+
+        boosterMagnet.text = boosterMagnetValue.ToString();
+        boosterR.text = boosterRValue.ToString();
+        boosterHighlight.text = boosterHighlightValue.ToString();
     }
 
     public void UpdatingScore(int amount, int total)
@@ -54,16 +82,44 @@ public class UIManager : MonoBehaviour
     {
         int currentScore = total - amount;
         int incrementAmount = 20;
-        int incrementsRemaining = amount / incrementAmount;
+        int incrementsRemaining = Mathf.Abs(amount) / incrementAmount;
 
         while (incrementsRemaining > 0)
         {
             currentScore += incrementAmount;
 
             score.text = "Score: " + currentScore;
+            menuScore.text = "Score: " + currentScore;
 
             incrementsRemaining--;
             yield return new WaitForSeconds(0.03f);
+
+            if (incrementsRemaining == 0)
+            {
+                //
+            }
+        }
+    }
+    public void DecreaseScore(int amount, int total)
+    {
+        StartCoroutine(DecreaseScoreIE(amount, total));
+    }
+
+    IEnumerator DecreaseScoreIE(int amount, int total)
+    {
+        int currentScore = total - amount;
+        int incrementAmount = 20;
+        int incrementsRemaining = Mathf.Abs(amount) / incrementAmount;
+
+        while (incrementsRemaining > 0)
+        {
+            currentScore -= incrementAmount;
+
+            score.text = "Score: " + currentScore;
+            menuScore.text = "Score: " + currentScore;
+
+            incrementsRemaining--;
+            yield return new WaitForSeconds(0.02f);
 
             if (incrementsRemaining == 0)
             {
@@ -88,6 +144,37 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void InformationPanel(int value)
+    {
+        StartCoroutine(ClosePanelAuto(value));
+    }
+
+    IEnumerator ClosePanelAuto(int value)
+    {
+        informationPanels[value].SetActive(true);
+        infoButtons[value].GetComponent<Button>().interactable = false;
+        yield return new WaitForSeconds(3f);
+        informationPanels[value].SetActive(false);
+        infoButtons[value].GetComponent<Button>().interactable = true;
+    }
+
+    public void InformationButton(int value)
+    {
+        infoButtons[value].transform.localScale = Vector3.one;
+    }
+
+    //IEnumerator ScaleGO(int value)
+    //{
+    //    infoButtons[value].transform.localScale = Vector3.one;
+
+    //    bool scaling = false;
+
+    //    while (!scaling)
+    //    {
+    //        infoButtons[value].transform.localScale = Vector3.Lerp()
+    //    }
+    //}
+
     public void LevelEndPanel(bool open, bool winlose, int levelID)
     {
         levelEndPanel.SetActive(open);
@@ -103,6 +190,13 @@ public class UIManager : MonoBehaviour
             {
                 item.SetActive(winlose);
             }
+
+            if(levelID == 5)
+            {
+                levelCompleted.text = "You completed all levels, play again";
+                PlayerPrefs.SetInt("CurrentLevel", 0);
+                nextLevelButton.interactable = false;
+            }
         }
     }
 
@@ -110,11 +204,15 @@ public class UIManager : MonoBehaviour
     {
         LevelEndPanel(false, true, LevelManager.Instance.currentLevel);
         LevelManager.Instance.NextLevelButton();
+        VibrationManager.Instance.Vibration(HapticTypes.MediumImpact);
     }
 
     public void MenuButton()
     {
         LevelEndPanel(false, false, LevelManager.Instance.currentLevel);
-        // TODO Menu Panel
+
+        GameState(false);
+
+        VibrationManager.Instance.Vibration(HapticTypes.MediumImpact);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static Level;
@@ -27,8 +28,6 @@ public class LevelManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        LoadCurrentLevelValues();
     }
 
     public void NextLevel()
@@ -57,7 +56,7 @@ public class LevelManager : MonoBehaviour
         LoadCurrentLevelValues();
     }
 
-    void LoadCurrentLevelValues()
+    public void LoadCurrentLevelValues()
     {
         CreateGameValues();
         CreateTiles();
@@ -87,6 +86,39 @@ public class LevelManager : MonoBehaviour
             {
                 gameManager.CheckTilesAreUnder();
             }
+        }
+    }
+
+    public void BoosterRTile(Tile tile)
+    {
+        tile.transform.SetParent(tilesParent);
+
+        int index = tile.name.IndexOf(" ") + 1;
+        string tileID = tile.name.Substring(index);
+
+        int value = int.Parse(tileID);
+
+        tile.transform.SetParent(tilesParent);
+        tile.transform.localPosition = new Vector3(CurrentLevelData.TileValuesList[value].tilePosition.x, CurrentLevelData.TileValuesList[value].tilePosition.y, 0);
+        tile.GetComponent<Tile>().isFinal = false;
+
+        gameManager.allTiles.Add(tile);
+        gameManager.levelTiles++;
+
+        gameManager.tileList.Remove(tile);
+
+        gameManager.CheckTilesAreUnder();
+    }
+
+    public void BoosterHighlight(Tile tile, int value)
+    {
+        if(gameManager.allTiles.Count >= value)
+        {
+            tile.transform.SetAsLastSibling();
+
+            gameManager.allTiles.Remove(tile);
+            gameManager.allTiles.Add(tile);
+            gameManager.CheckTilesAreUnder();
         }
     }
 }

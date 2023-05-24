@@ -35,24 +35,16 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         itemType = type;
         itemImage.sprite = tileSprites[((int)type)];
 
-        Initialize();
+        //Initialize();
+        tileName = itemImage.sprite.name;
+        disableImage.enabled = false;
+
+        
     }
 
     public void ReadyTile()
     {
         isFinal = false;
-    }
-
-    private void Initialize()
-    {
-        tileName = itemImage.sprite.name;
-        CheckItem(false);
-
-        if (isUnder)
-        {
-            CheckItem(true);
-            mainImage.raycastTarget = false;
-        }
     }
 
     public void CheckItem(bool value)
@@ -65,16 +57,10 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         }
     }
 
-    public void DisableItem()
+    public void UnControlItem(bool value)
     {
-        isUnder = true;
-        disableImage.enabled = true;
-    }
-
-    public void EnableItem()
-    {
-        isUnder = false;
-        disableImage.enabled = false;
+        isUnder = value;
+        disableImage.enabled = value;
     }
 
     public void OnPointerDown(PointerEventData eventData)
@@ -99,7 +85,7 @@ public class Tile : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
         // Stop animation of scaling
         // Check for game manager
 
-        if (isUnder) return;
+        if (isUnder || isFinal) return;
         GameManager.Instance.CheckTile(this);
     }
 }

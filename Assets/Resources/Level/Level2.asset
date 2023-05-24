@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a16a98c12c47ee84fb222f6c276370ca, type: 3}
+  m_Name: Level2
+  m_EditorClassIdentifier: 
+  LevelValues2:
+  - levelID: 1
+    levelName: safasf
+    typeTileCount: 3
+    TileValuesList2:
+    - {fileID: 4296121484998831134, guid: 493c26abd1461084d91a6564a9a62e38, type: 3}
+    - {fileID: 1276590030711599889, guid: 4906630601b18774fb273cc264763343, type: 3}
+    - {fileID: 1968912384995965531, guid: 650a8e3fa7db9fc41a8d1e19d2bf745d, type: 3}
+    - {fileID: 9120550243902373494, guid: 0acb932e15f650b4b9b214895b345bdd, type: 3}
+    - {fileID: 3322690376584675052, guid: 6f92136ea27aa314086ad634f1d8655c, type: 3}
+    - {fileID: 2034927053155874448, guid: db57832980f821749b0e2c2b3546d805, type: 3}
+    - {fileID: 6899201404034104052, guid: 8924be549177f2742a8383ada75c3400, type: 3}
+    - {fileID: 4596365310182878190, guid: a97ae27170976774d9cce5aa19be5fc6, type: 3}
+    - {fileID: 5247863016882356923, guid: cb4d8b874344afc4fa2f8999f56dbe44, type: 3}

@@ -26,6 +26,7 @@ public class ObjectPool : MonoBehaviour
         for (int i = 0; i < poolSize; i++)
         {
             GameObject obj = Instantiate(prefab);
+            obj.transform.localScale = Vector3.one;
             obj.transform.SetParent(parent);
             obj.SetActive(false);
             objectPool.Add(obj);
@@ -39,7 +40,7 @@ public class ObjectPool : MonoBehaviour
             if (!objectPool[i].activeInHierarchy)
             {
                 objectPool[i].SetActive(true);
-                objectPool[i].GetComponent<Tile>().isFinal = false;
+                objectPool[i].transform.localScale = Vector3.one;
                 return objectPool[i];
             }
         }
@@ -47,6 +48,7 @@ public class ObjectPool : MonoBehaviour
         if (expandable)
         {
             GameObject obj = Instantiate(prefab);
+            obj.transform.localScale = Vector3.one;
             obj.transform.SetParent(parent);
             obj.SetActive(true);
             objectPool.Add(obj);

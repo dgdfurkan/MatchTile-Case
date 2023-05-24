@@ -9,27 +9,28 @@ public class GameManager : MonoBehaviour
 
     [Header("Objects")]
     [SerializeField] private GameObject[] targetArea = new GameObject[7];
-    [SerializeField] private List<Tile> tileList;
+    //[HideInInspector]
+    public List<Tile> tileList;
+    //[HideInInspector]
     public List<Tile> allTiles = new List<Tile>();
 
     [Header("Properties")]
     private const int tileLenght = 7;
     [HideInInspector] public int levelTiles;
 
-    private int firstValue, secondValue;
+    private int firstValue;
+
+    private int score = 0;
+    private const int amount = 300;
 
     private void Awake()
     {
         Instance = this;
 
+        score = PlayerPrefs.GetInt("Score", 0);
     }
 
     public void SetupGame()
-    {
-        
-    }
-
-    public void CountAllTiles()
     {
         
     }
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour
         {
             print("<color=red> Lose </color>");
             // Lose effects (Panel, sounds, effects..)
+            //UIManager.Instance.LevelEndPanel(true, );
         }
         else
         {
@@ -61,6 +63,8 @@ public class GameManager : MonoBehaviour
 
                 tile.CheckItem(true);
 
+                allTiles.Remove(tile);
+
                 CheckTilesAreUnder();
             }
         }
@@ -69,7 +73,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckTilesAreUnder()
     {
-        if (allTiles.Count <= 1) return;
+        Debug.Log("allTiles.Count: " + allTiles.Count);
+        firstValue = -1;
 
         for (int i = 0; i < allTiles.Count; i++)
         {
@@ -77,29 +82,36 @@ public class GameManager : MonoBehaviour
             {
                 if (CheckCollision(allTiles[i], allTiles[j]))
                 {
+                    Debug.Log("IfChecking: " + allTiles[i].name + " ve " + allTiles[j].name);
                     if (!allTiles[i].isFinal && !allTiles[j].isFinal)
-                    {
-                        //Debug.Log("Image " + allTiles[i].name + " ve Image " + allTiles[j].name + " birbirine deðiyor!");
-                        
+                    {                       
                         if (j > i)
                         {
                             Debug.Log("Image1BU " + allTiles[i].name + " ve Image " + allTiles[j].name + " birbirine deðiyor!");
-                            allTiles[i].DisableItem();
+                            allTiles[i].UnControlItem(true);
                             firstValue = i;
-                            allTiles[j].EnableItem();
+                            Debug.Log("firstValue: "  + firstValue);
+                            allTiles[j].UnControlItem(false);
                         }
                     }
                 }
                 else
                 {
                     Debug.Log("Image3BU " + allTiles[i].name + " ve Image " + allTiles[j].name);
+                    Debug.Log("firstValue: " + firstValue + " : " + i);
                     if (firstValue != i)
                     {
-                        allTiles[i].EnableItem();
-                        allTiles[j].EnableItem();
+                        Debug.Log("Girdi");
+                        allTiles[i].UnControlItem(false);
+                        allTiles[j].UnControlItem(false);
                     }
                 }
             }
+        }
+
+        if(allTiles.Count == 1)
+        {
+            allTiles[0].UnControlItem(false);
         }
     }
 
@@ -133,10 +145,12 @@ public class GameManager : MonoBehaviour
         if(levelTiles == 0 && tileList.Count == 0)
         {
             print("<color=green> Win </color>");
+            LevelManager.Instance.NextLevel();
         }
         else if (tileList.Count == tileLenght)
         {
             print("<color=red> Lose </color>");
+            UIManager.Instance.LevelEndPanel(true, false, LevelManager.Instance.CurrentLevelData.levelID);
         }
     }
     private int AvailablePlace(Tile tile)
@@ -161,7 +175,6 @@ public class GameManager : MonoBehaviour
     private void TileToTilesPlace(Tile tile, GameObject gameObject)
     {
         tile.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y);
-        Debug.Log("SetParent: " + tile.name);
     }
 
     private void FixTilesPlace(int index)
@@ -171,7 +184,6 @@ public class GameManager : MonoBehaviour
         for (int i = tileList.Count; i > index; i--)
         {
             TileToTilesPlace(tileList[i - 1], targetArea[i]);
-            Debug.Log("TileToTilesPlace: " + tileList[i-1].name);
         }
     }
 
@@ -181,26 +193,13 @@ public class GameManager : MonoBehaviour
 
         int count = 0;
 
-        Debug.Log("tiles.Count: " + tileList.Count);
-
         for (int i = 0; i < tileList.Count; i++)
         {
             if (tileList[i].itemType == tile.itemType)
             {
                 count++;
-                Debug.Log("Counted: " + count);
                 if(count == 3)
                 {
-                    Debug.Log("Counted3 olmali: " + count);
-                    Debug.Log("i: " + i);
-                    Debug.Log("tiles[i]: " + tileList[i].name);
-                    Debug.Log("tiles[i-1]: " + tileList[i-1].name);
-                    Debug.Log("tiles[i-2]: " + tileList[i-2].name);
-
-                    //Destroy(tileList[i].gameObject, .4f);
-                    //Destroy(tileList[i-1].gameObject, .4f);
-                    //Destroy(tileList[i-2].gameObject, .4f);
-
                     StartCoroutine(DeactivateObject(tileList[i].gameObject));
                     StartCoroutine(DeactivateObject(tileList[i-1].gameObject));
                     StartCoroutine(DeactivateObject(tileList[i-2].gameObject));
@@ -208,6 +207,10 @@ public class GameManager : MonoBehaviour
                     tileList.RemoveAll(t => t.itemType == tile.itemType);
 
                     StartCoroutine(EditAfterMatching(.5f));
+
+                    score += amount;
+                    PlayerPrefs.SetInt("Score", score);
+                    UIManager.Instance.UpdatingScore(amount, score);
                 }
             }
         }
@@ -218,9 +221,6 @@ public class GameManager : MonoBehaviour
         go.gameObject.GetComponent<Tile>().isFinal = true;
         yield return new WaitForSeconds(.4f);
         ObjectPool.Instance.ReturnObjectToPool(go);
-
-        yield return new WaitForSeconds(4f);
-        GameObject saa = ObjectPool.Instance.GetObjectFromPool();
 
     }
 

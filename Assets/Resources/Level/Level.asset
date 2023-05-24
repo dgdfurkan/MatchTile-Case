@@ -37,48 +37,84 @@ MonoBehaviour:
       tilePosition: {x: 200, y: -125}
   - levelID: 2
     levelName: 'Secrets Behind Blooming Gardens '
-    typeTileCount: 3
+    typeTileCount: 4
     TileValuesList:
-    - type: 3
+    - type: 7
       tilePosition: {x: -200, y: 275}
-    - type: 5
+    - type: 1
       tilePosition: {x: 0, y: 275}
-    - type: 0
+    - type: 1
       tilePosition: {x: 200, y: 275}
-    - type: 0
-      tilePosition: {x: -200, y: 75}
+    - type: 2
+      tilePosition: {x: -200, y: 215}
     - type: 3
-      tilePosition: {x: 0, y: 75}
-    - type: 0
-      tilePosition: {x: 200, y: 75}
-    - type: 5
-      tilePosition: {x: -200, y: -125}
+      tilePosition: {x: 0, y: 215}
+    - type: 7
+      tilePosition: {x: 200, y: 215}
+    - type: 7
+      tilePosition: {x: -200, y: 155}
+    - type: 2
+      tilePosition: {x: 0, y: 155}
+    - type: 1
+      tilePosition: {x: 200, y: 155}
+    - type: 2
+      tilePosition: {x: -200, y: 95}
     - type: 3
-      tilePosition: {x: 0, y: -125}
-    - type: 5
-      tilePosition: {x: 200, y: -125}
+      tilePosition: {x: 0, y: 95}
+    - type: 3
+      tilePosition: {x: 200, y: 95}
   - levelID: 3
     levelName: 'Destruction of Frosty Chains '
-    typeTileCount: 3
+    typeTileCount: 8
     TileValuesList:
-    - type: 3
-      tilePosition: {x: -200, y: 275}
-    - type: 5
-      tilePosition: {x: 0, y: 275}
     - type: 0
-      tilePosition: {x: 200, y: 275}
+      tilePosition: {x: 0, y: 195}
+    - type: 4
+      tilePosition: {x: -60, y: 255}
+    - type: 6
+      tilePosition: {x: -120, y: 315}
     - type: 0
-      tilePosition: {x: -200, y: 75}
+      tilePosition: {x: -180, y: 315}
+    - type: 4
+      tilePosition: {x: -240, y: 255}
+    - type: 2
+      tilePosition: {x: -300, y: 195}
+    - type: 5
+      tilePosition: {x: -360, y: 135}
     - type: 3
-      tilePosition: {x: 0, y: 75}
+      tilePosition: {x: -300, y: 75}
+    - type: 2
+      tilePosition: {x: -240, y: 15}
+    - type: 7
+      tilePosition: {x: -180, y: -60}
+    - type: 7
+      tilePosition: {x: -120, y: -105}
+    - type: 1
+      tilePosition: {x: -61, y: -180}
+    - type: 3
+      tilePosition: {x: 60, y: 255}
+    - type: 3
+      tilePosition: {x: 120, y: 315}
     - type: 0
-      tilePosition: {x: 200, y: 75}
+      tilePosition: {x: 180, y: 315}
+    - type: 4
+      tilePosition: {x: 240, y: 255}
+    - type: 1
+      tilePosition: {x: 300, y: 195}
+    - type: 6
+      tilePosition: {x: 360, y: 135}
+    - type: 1
+      tilePosition: {x: 300, y: 75}
+    - type: 2
+      tilePosition: {x: 240, y: 15}
     - type: 5
-      tilePosition: {x: -200, y: -125}
-    - type: 3
-      tilePosition: {x: 0, y: -125}
+      tilePosition: {x: 180, y: -60}
+    - type: 6
+      tilePosition: {x: 120, y: -105}
+    - type: 7
+      tilePosition: {x: 61, y: -180}
     - type: 5
-      tilePosition: {x: 200, y: -125}
+      tilePosition: {x: 0, y: -225}
   - levelID: 4
     levelName: 'Invincible Obstacles of Sunshine '
     typeTileCount: 3

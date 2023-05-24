@@ -39,16 +39,22 @@ public class LevelManager : MonoBehaviour
     IEnumerator NextLevelSlowly()
     {
         PlayerPrefs.SetInt("CurrentLevel", currentLevel + 1);
-        DestroyOldObjects();
+        // TODO Panel
         yield return new WaitForSecondsRealtime(.4f);
-        LoadCurrentLevelValues();
+        UIManager.Instance.LevelEndPanel(true, true,CurrentLevelData.levelID-1);
+        //LoadCurrentLevelValues();
     }
 
-    private void DestroyOldObjects()
+    public void NextLevelButton()
     {
-        //foreach (var item in GameManager.Instance.CreatedBirds) Destroy(item);
+        StartCoroutine(NextLevelButtonSlowly());
+    }
 
-
+    IEnumerator NextLevelButtonSlowly()
+    {
+        // TODO Panel
+        yield return new WaitForSecondsRealtime(.4f);
+        LoadCurrentLevelValues();
     }
 
     void LoadCurrentLevelValues()
@@ -66,18 +72,18 @@ public class LevelManager : MonoBehaviour
     {
         for (int i = 0; i < CurrentLevelData.TileValuesList.Count; i++)
         {
-            //GameObject createdTile = Instantiate(tileObject, (tilesParent.position + new Vector3(CurrentLevelData.TileValuesList[i].tilePosition.x, CurrentLevelData.TileValuesList[i].tilePosition.y, 0)), Quaternion.identity);
-
             GameObject createdTile = ObjectPool.Instance.GetObjectFromPool();
 
-            createdTile.transform.position = tilesParent.position + new Vector3(CurrentLevelData.TileValuesList[i].tilePosition.x, CurrentLevelData.TileValuesList[i].tilePosition.y, 0);
-
             createdTile.transform.SetParent(tilesParent);
+            createdTile.transform.localPosition = new Vector3(CurrentLevelData.TileValuesList[i].tilePosition.x, CurrentLevelData.TileValuesList[i].tilePosition.y, 0);
+            createdTile.name = CurrentLevelData.TileValuesList[i].type.ToString() + " " + gameManager.allTiles.Count;
             createdTile.GetComponent<Tile>().SetupTile(CurrentLevelData.TileValuesList[i].type);
+            createdTile.GetComponent<Tile>().isFinal = false;
+
             gameManager.allTiles.Add(createdTile.GetComponent<Tile>());
             gameManager.levelTiles++;
 
-            if(i == CurrentLevelData.TileValuesList.Count)
+            if(i == CurrentLevelData.TileValuesList.Count-1)
             {
                 gameManager.CheckTilesAreUnder();
             }

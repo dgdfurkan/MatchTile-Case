@@ -32,6 +32,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] informationPanels;
     [SerializeField] private GameObject[] infoButtons;
 
+    [Header("Leaderboard")]
+    [SerializeField] private GameObject leaderbardPanel;
+    [SerializeField] private GameObject rankPrefab;
+    [SerializeField] private Transform rankContent;
+
     void Awake()
     {
         Instance = this;
@@ -90,7 +95,7 @@ public class UIManager : MonoBehaviour
             menuScore.text = "Score: " + currentScore;
 
             incrementsRemaining--;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.02f);
 
             if (incrementsRemaining == 0)
             {
@@ -106,7 +111,7 @@ public class UIManager : MonoBehaviour
     IEnumerator DecreaseScoreIE(int amount, int total)
     {
         int currentScore = total - amount;
-        int incrementAmount = 20;
+        int incrementAmount = 100;
         int incrementsRemaining = Mathf.Abs(amount) / incrementAmount;
 
         while (incrementsRemaining > 0)
@@ -124,6 +129,27 @@ public class UIManager : MonoBehaviour
                 //
             }
         }
+    }
+
+    public void LeaderboardButton()
+    {
+        if(rankContent.childCount > 0)
+        {
+            for (int i = 0; i < rankContent.childCount; i++)
+            {
+                Destroy(rankContent.GetChild(i).gameObject);
+            }
+        }
+        
+        PlayfabManager.Instance.GetLeaderboard();
+    }
+
+    public void LeaderboardRank(int rank, string name, int value)
+    {
+        GameObject user = Instantiate(rankPrefab, rankContent);
+        user.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "#" + rank.ToString();
+        user.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = name;
+        user.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = value.ToString();
     }
 
     public void UpdatingBooster(BoosterManager.BoosterType boosterType, int amount)

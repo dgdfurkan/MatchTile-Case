@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
 
     public void NextLevel()
     {
+        PlayfabManager.Instance.SendLeaderboard(1);
         StartCoroutine(NextLevelSlowly());
     }
 

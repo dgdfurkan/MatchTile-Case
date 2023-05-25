@@ -146,22 +146,6 @@ public class GameManager : MonoBehaviour
         {
             print("<color=red> Lose </color>");
 
-            //foreach (Tile item in allTiles)
-            //{
-            //    allTiles.Remove(item);
-            //    item.isFinal = false;
-            //    ObjectPool.Instance.ReturnObjectToPool(item.gameObject);
-            //}
-
-            //foreach (Tile item in tileList)
-            //{
-            //    tileList.Remove(item);
-            //    item.isFinal = false;
-            //    ObjectPool.Instance.ReturnObjectToPool(item.gameObject);
-            //}
-
-            Debug.Log(allTiles.Count);
-
             for (int i = 0; i < allTiles.Count; i++)
             {
                 allTiles[i].isFinal = false;
@@ -176,8 +160,6 @@ public class GameManager : MonoBehaviour
 
             allTiles.Clear();
             tileList.Clear();
-
-            Debug.Log(allTiles.Count);
 
             levelTiles = 0;
 

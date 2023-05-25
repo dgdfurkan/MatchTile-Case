@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Newtonsoft.Json.Linq;
 
 public class UIManager : MonoBehaviour
 {
@@ -193,7 +191,7 @@ public class UIManager : MonoBehaviour
 
             if(winlose) PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") + 1);
 
-            if (levelID == 5)
+            if (levelID == 5 && winlose)
             {
                 levelCompleted.text = "You completed all levels, play again";
                 PlayerPrefs.SetInt("CurrentLevel", 0);

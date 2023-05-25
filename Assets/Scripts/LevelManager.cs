@@ -37,10 +37,14 @@ public class LevelManager : MonoBehaviour
 
     IEnumerator NextLevelSlowly()
     {
-        PlayerPrefs.SetInt("CurrentLevel", currentLevel + 1);
+        
+
+        Debug.Log("currentLevelONE: " + currentLevel);
         // TODO Panel
         yield return new WaitForSecondsRealtime(.4f);
-        UIManager.Instance.LevelEndPanel(true, true,CurrentLevelData.levelID-1);
+        UIManager.Instance.LevelEndPanel(true, true, CurrentLevelData.levelID);
+        
+        Debug.Log("currentLevelTWO: " + currentLevel);
         //LoadCurrentLevelValues();
     }
 

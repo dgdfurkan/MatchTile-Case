@@ -21,7 +21,6 @@ public class BoosterManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("BoosterMagnet") == 0)
         {
-            Debug.Log("Poor BoosterMagnet");
             VibrationManager.Instance.Vibration(HapticTypes.LightImpact);
             return;
         }
@@ -63,7 +62,6 @@ public class BoosterManager : MonoBehaviour
 
         if (PlayerPrefs.GetInt("BoosterR") == 0)
         {
-            Debug.Log("Poor BoosterR");
             VibrationManager.Instance.Vibration(HapticTypes.LightImpact);
             return;
         }
@@ -95,14 +93,12 @@ public class BoosterManager : MonoBehaviour
 
         if(undertilesValue.Count <= 0)
         {
-            Debug.Log("Error");
             VibrationManager.Instance.Vibration(HapticTypes.Failure);
             return;
         }
 
         if (PlayerPrefs.GetInt("BoosterHighlight") == 0)
         {
-            Debug.Log("Poor BoosterHighlight");
             VibrationManager.Instance.Vibration(HapticTypes.LightImpact);
             return;
         }
@@ -128,7 +124,6 @@ public class BoosterManager : MonoBehaviour
             case 0:
                 if (gameManager.score < 1500)
                 {
-                    Debug.Log("Sa");
                     VibrationManager.Instance.Vibration(HapticTypes.Failure);
                     return;
                 }
@@ -139,7 +134,6 @@ public class BoosterManager : MonoBehaviour
             case 1:
                 if (gameManager.score < 1800)
                 {
-                    Debug.Log("Saa");
                     VibrationManager.Instance.Vibration(HapticTypes.Failure);
                     return;
                 }
@@ -150,7 +144,6 @@ public class BoosterManager : MonoBehaviour
             case 2:
                 if (gameManager.score < 2000)
                 {
-                    Debug.Log("Saaa");
                     VibrationManager.Instance.Vibration(HapticTypes.Failure);
                     return;
                 }

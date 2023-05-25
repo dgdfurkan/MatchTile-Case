@@ -191,7 +191,9 @@ public class UIManager : MonoBehaviour
                 item.SetActive(winlose);
             }
 
-            if(levelID == 5)
+            if(winlose) PlayerPrefs.SetInt("CurrentLevel", PlayerPrefs.GetInt("CurrentLevel") + 1);
+
+            if (levelID == 5)
             {
                 levelCompleted.text = "You completed all levels, play again";
                 PlayerPrefs.SetInt("CurrentLevel", 0);

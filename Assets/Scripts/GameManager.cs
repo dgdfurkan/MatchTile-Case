@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
 
     public void CheckTilesAreUnder()
     {
-        Debug.Log("allTiles.Count: " + allTiles.Count);
         firstValue = -1;
 
         for (int i = 0; i < allTiles.Count; i++)
@@ -85,26 +84,20 @@ public class GameManager : MonoBehaviour
             {
                 if (CheckCollision(allTiles[i], allTiles[j]))
                 {
-                    Debug.Log("IfChecking: " + allTiles[i].name + " ve " + allTiles[j].name);
                     if (!allTiles[i].isFinal && !allTiles[j].isFinal)
                     {                       
                         if (j > i)
                         {
-                            Debug.Log("Image1BU " + allTiles[i].name + " ve Image " + allTiles[j].name + " birbirine deðiyor!");
                             allTiles[i].UnControlItem(true);
                             firstValue = i;
-                            Debug.Log("firstValue: "  + firstValue);
                             allTiles[j].UnControlItem(false);
                         }
                     }
                 }
                 else
                 {
-                    Debug.Log("Image3BU " + allTiles[i].name + " ve Image " + allTiles[j].name);
-                    Debug.Log("firstValue: " + firstValue + " : " + i);
                     if (firstValue != i)
                     {
-                        Debug.Log("Girdi");
                         allTiles[i].UnControlItem(false);
                         allTiles[j].UnControlItem(false);
                     }

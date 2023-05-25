@@ -13,6 +13,64 @@ MonoBehaviour:
   m_Name: Level
   m_EditorClassIdentifier: 
   LevelValues:
+  - levelID: 5
+    levelName: 'Deadly Test of Solar Fireworks '
+    typeTileCount: 8
+    TileValuesList:
+    - type: 1
+      tilePosition: {x: -121, y: 240}
+    - type: 0
+      tilePosition: {x: -210, y: 270}
+    - type: 2
+      tilePosition: {x: -300, y: 300}
+    - type: 3
+      tilePosition: {x: 121, y: 240}
+    - type: 4
+      tilePosition: {x: 210, y: 270}
+    - type: 5
+      tilePosition: {x: 300, y: 300}
+    - type: 6
+      tilePosition: {x: 0, y: 240}
+    - type: 1
+      tilePosition: {x: 0, y: 180}
+    - type: 7
+      tilePosition: {x: -62, y: 118}
+    - type: 5
+      tilePosition: {x: -122, y: 60}
+    - type: 2
+      tilePosition: {x: -180, y: 0}
+    - type: 0
+      tilePosition: {x: -240, y: -60}
+    - type: 4
+      tilePosition: {x: -300, y: -120}
+    - type: 2
+      tilePosition: {x: 62, y: 118}
+    - type: 5
+      tilePosition: {x: 122, y: 60}
+    - type: 4
+      tilePosition: {x: 180, y: 0}
+    - type: 6
+      tilePosition: {x: 240, y: -60}
+    - type: 1
+      tilePosition: {x: 300, y: -120}
+    - type: 7
+      tilePosition: {x: -240, y: -180}
+    - type: 7
+      tilePosition: {x: -184, y: -240}
+    - type: 4
+      tilePosition: {x: -61, y: -240}
+    - type: 4
+      tilePosition: {x: 240, y: -180}
+    - type: 0
+      tilePosition: {x: 61, y: -240}
+    - type: 6
+      tilePosition: {x: 184, y: -240}
+    - type: 3
+      tilePosition: {x: -62, y: -300}
+    - type: 4
+      tilePosition: {x: 62, y: -300}
+    - type: 3
+      tilePosition: {x: 0, y: 60}
   - levelID: 1
     levelName: 'Journey of Sunlit Shores '
     typeTileCount: 3
@@ -173,25 +231,3 @@ MonoBehaviour:
       tilePosition: {x: 255, y: -50}
     - type: 3
       tilePosition: {x: 315, y: -80}
-  - levelID: 5
-    levelName: 'Deadly Test of Solar Fireworks '
-    typeTileCount: 3
-    TileValuesList:
-    - type: 3
-      tilePosition: {x: -200, y: 275}
-    - type: 5
-      tilePosition: {x: 0, y: 275}
-    - type: 0
-      tilePosition: {x: 200, y: 275}
-    - type: 0
-      tilePosition: {x: -200, y: 75}
-    - type: 3
-      tilePosition: {x: 0, y: 75}
-    - type: 0
-      tilePosition: {x: 200, y: 75}
-    - type: 5
-      tilePosition: {x: -200, y: -125}
-    - type: 3
-      tilePosition: {x: 0, y: -125}
-    - type: 5
-      tilePosition: {x: 200, y: -125}
